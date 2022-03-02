@@ -9,5 +9,5 @@ pod 'Alamofire', '~> 5.5'
 pod 'SDWebImage'  
 pod 'lottie-ios'
 pod 'ReachabilitySwift'
-
+pod 'SkeletonView'
 end

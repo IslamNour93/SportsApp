@@ -14,7 +14,8 @@ import Reachability
 
 class SportsCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
-    var selectedIndex = 0
+    
+    var sport : String = ""
     let reachability = try! Reachability()
     private var arrOfSports : [SportApi] = []
     let animation = AnimationView()
@@ -22,7 +23,7 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // getSportsData()
+        
         
         
     }
@@ -52,10 +53,8 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
                }
                do{
                let json = try JSONDecoder().decode(Sports.self, from: data)
-                   self.arrOfSports = json.sports!
-                   for i in 0..<self.arrOfSports.count{
-                       print(self.arrOfSports[i].strSport!)
-                   }
+                   guard let resultArr = json.sports else{return}
+                   self.arrOfSports = resultArr
                }
                catch {
                    print(error.localizedDescription)
@@ -117,29 +116,46 @@ override func numberOfSections(in collectionView: UICollectionView) -> Int {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "item", for: indexPath) as! SportsCollectionViewCell
        
         cell.sportImageView.sd_setImage(with: URL(string: arrOfSports[indexPath.row].strSportThumb!), completed: nil)
-            cell.sportNameLabel.text = self.arrOfSports[indexPath.row].strSport
+        cell.sportNameLabel.text = self.arrOfSports[indexPath.row].strSport
+        cell.contentMode = .scaleAspectFill
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 22
+        cell.layer.borderWidth = 0.3
+        cell.layer.shadowOpacity = 0.5
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.backgroundColor = .lightText
     
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width*0.493, height: self.view.frame.width*0.45)
+        return CGSize(width: self.view.frame.width*0.497, height: self.view.frame.width*0.45)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 8
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.1
+        return 0.2
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        selectedIndex = indexPath.row
         
-        let vc = TableViewController()
-        present(vc, animated: true, completion: nil)
+        sport = arrOfSports[indexPath.row].strSport!
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesVC") as! LeaguesVc
+        vc.sportName = arrOfSports[indexPath.row].strSport!
+        vc.title = "Leagues"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let transEffect = CATransform3DTranslate(CATransform3DIdentity, 0, 250 , -500)
+        cell.layer.transform = transEffect
+        UIView.animate(withDuration: 0.7) {
+            cell.layer.transform = CATransform3DIdentity
+        }
     }
 }
 

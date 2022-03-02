@@ -8,18 +8,19 @@
 import UIKit
 
 class LeagueTableViewCell: UITableViewCell {
-
+    
+   
+    @IBOutlet weak var youtubeButton: UIButton!
     @IBOutlet weak var leagueLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet weak var leagueIcon: UIImageView!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        
     }
+ 
 
 }

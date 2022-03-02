@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="UpcomingCollectionCell" customModule="Sports_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="754" height="293"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="754" height="293"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pl" translatesAutoresizingMaskIntoConstraints="NO" id="VUb-wf-XGg">
+                        <rect key="frame" x="10" y="0.0" width="734" height="293"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home Team" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM7-iW-OsZ">
+                        <rect key="frame" x="30" y="262.5" width="91.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ai1-3h-ZIV">
+                        <rect key="frame" x="273" y="55" width="208" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="208" id="box-sf-rdu"/>
+                            <constraint firstAttribute="height" constant="18" id="v7h-Es-W0E"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away Team" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kwt-Re-fqu">
+                        <rect key="frame" x="638.5" y="262.5" width="85.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldy-T3-AuM">
+                        <rect key="frame" x="273" y="30.5" width="208" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="208" id="3jU-uO-7qE"/>
+                            <constraint firstAttribute="height" constant="20.5" id="fet-TS-bu9"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="skeletonCornerRadius">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Kwt-Re-fqu" secondAttribute="trailing" constant="30" id="Dis-mg-8e4"/>
+                <constraint firstItem="dM7-iW-OsZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="GUf-9S-HcE"/>
+                <constraint firstItem="VUb-wf-XGg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="JvE-Bk-DQI"/>
+                <constraint firstItem="VUb-wf-XGg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="QBg-Uq-mzR"/>
+                <constraint firstItem="Ai1-3h-ZIV" firstAttribute="top" secondItem="ldy-T3-AuM" secondAttribute="bottom" constant="4" id="Sxe-qr-WAF"/>
+                <constraint firstAttribute="trailing" secondItem="VUb-wf-XGg" secondAttribute="trailing" constant="10" id="h0h-de-uPg"/>
+                <constraint firstItem="Kwt-Re-fqu" firstAttribute="centerY" secondItem="dM7-iW-OsZ" secondAttribute="centerY" id="lc3-QZ-Ivu"/>
+                <constraint firstItem="ldy-T3-AuM" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="lpp-iN-DyW"/>
+                <constraint firstAttribute="bottom" secondItem="VUb-wf-XGg" secondAttribute="bottom" id="mNp-UG-c7w"/>
+                <constraint firstItem="Ai1-3h-ZIV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="oqy-CI-Lj1"/>
+                <constraint firstItem="VUb-wf-XGg" firstAttribute="top" secondItem="ldy-T3-AuM" secondAttribute="bottom" constant="-51" id="pFN-Ub-3WC"/>
+                <constraint firstAttribute="bottom" secondItem="dM7-iW-OsZ" secondAttribute="bottom" constant="10" id="q12-ie-cgH"/>
+            </constraints>
+            <size key="customSize" width="754" height="293"/>
+            <connections>
+                <outlet property="HomeTeamLabel" destination="dM7-iW-OsZ" id="aOf-xi-GGs"/>
+                <outlet property="awayTeamLabel" destination="Kwt-Re-fqu" id="k7g-ka-WrX"/>
+                <outlet property="eventDateLabel" destination="ldy-T3-AuM" id="3Gf-qO-iTZ"/>
+                <outlet property="eventTimeLabel" destination="Ai1-3h-ZIV" id="vqR-gY-j8O"/>
+                <outlet property="upcomingPosterView" destination="VUb-wf-XGg" id="6zX-3C-1Gz"/>
+            </connections>
+            <point key="canvasLocation" x="192.75362318840581" y="129.57589285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pl" width="1920" height="1080"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
