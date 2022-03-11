@@ -16,6 +16,8 @@ class LatestTableCell: UITableViewCell {
     @IBOutlet weak var latestHomeLabel: UILabel!
     @IBOutlet weak var latestEventImage: UIImageView!
     @IBOutlet weak var latestAwayLabel: UILabel!
+    @IBOutlet weak var homeScoreLabel: UILabel!
+    @IBOutlet weak var awayScoreLabel: UILabel!
     static let identifier = "LatestTableCell"
     static func nib()->UINib{
         

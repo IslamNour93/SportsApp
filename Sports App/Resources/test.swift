@@ -4,7 +4,7 @@
 //
 //  Created by Islam Noureldeen on 28/02/2022.
 //
-
+/*
 import UIKit
 import Alamofire
 class EventsTableView: UITableViewController {
@@ -151,3 +151,4 @@ extension EventsTableView : TeamProtocol{
     
     
 }
+*/

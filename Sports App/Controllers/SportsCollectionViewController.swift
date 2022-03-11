@@ -11,7 +11,7 @@ import SDWebImage
 import CloudKit
 import Lottie
 import Reachability
-
+import ViewAnimator
 class SportsCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
     
@@ -19,11 +19,9 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
     let reachability = try! Reachability()
     private var arrOfSports : [SportApi] = []
     let animation = AnimationView()
-    let jsonUrlString = "https://www.thesportsdb.com/api/v1/json/2/all_sports.php#"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         
     }
@@ -31,6 +29,8 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        NetworkServices.getSportsData(completion: loadData)
+        loadData(arrOfSports)
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
                do{
                  try reachability.startNotifier()
@@ -40,32 +40,17 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
     }
 
  // Mark:- Private
-    private func getSportsData(){
-        let url = URL(string: jsonUrlString)
-       
-       AF.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).response{
-           response in switch response.result{
-           case.failure(_):
-               print("error")
-           case.success(_):
-               guard let data = response.data else{
-                   return
-               }
-               do{
-               let json = try JSONDecoder().decode(Sports.self, from: data)
-                   guard let resultArr = json.sports else{return}
-                   self.arrOfSports = resultArr
-               }
-               catch {
-                   print(error.localizedDescription)
-               }
-               DispatchQueue.main.async {
-                   self.collectionView.reloadData()
-                   self.animation.isHidden = true
-                   
-               }
-           }
-       }
+    
+    private func loadData(_ data:[SportApi])->Void{
+
+        DispatchQueue.main.async {
+            self.arrOfSports = data
+            let animation = AnimationType.from(direction: .bottom, offset: 300)
+            UIView.animate(views: self.collectionView.visibleCells, animations: [animation] ,duration: 2)
+            self.collectionView.reloadData()
+            self.animation.isHidden = true
+            self.animation.removeFromSuperview()
+        }
     }
     
     private func setupAnimatation(){
@@ -86,13 +71,19 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
               
           case .wifi:
               print("Reachable Via Wifi")
-              getSportsData()
+              NetworkServices.getSportsData(completion: loadData)
+              loadData(arrOfSports)
           case .cellular:
               print("Reachable via Cellular")
               
           case .unavailable:
-              print("Network not reachable")
+              
               setupAnimatation()
+              let alert = UIAlertController(title: "Connection Failed", message: "You are not connected with Internet", preferredStyle: .alert)
+              let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+              alert.addAction(okAction)
+              present(alert, animated: true, completion: nil)
+              print("Network not reachable")
           case .none:
               print("None")
               
@@ -143,7 +134,7 @@ override func numberOfSections(in collectionView: UICollectionView) -> Int {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
-        sport = arrOfSports[indexPath.row].strSport!
+//        sport = arrOfSports[indexPath.row].strSport!
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesVC") as! LeaguesVc
         vc.sportName = arrOfSports[indexPath.row].strSport!
         vc.title = "Leagues"

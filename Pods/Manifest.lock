@@ -6,6 +6,7 @@ PODS:
     - SDWebImage/Core (= 5.12.2)
   - SDWebImage/Core (5.12.2)
   - SkeletonView (1.29.2)
+  - ViewAnimator (3.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5)
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SDWebImage
   - SkeletonView
+  - ViewAnimator
 
 SPEC REPOS:
   trunk:
@@ -21,6 +23,7 @@ SPEC REPOS:
     - ReachabilitySwift
     - SDWebImage
     - SkeletonView
+    - ViewAnimator
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -28,7 +31,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
   SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
+  ViewAnimator: a9ceed80266e00fd435ec4fb99b2df64d580d0e4
 
-PODFILE CHECKSUM: 8071040730a98176fa6581f45cb659c6086d54a2
+PODFILE CHECKSUM: 4cdaa3105525fba4b93bb678322575af69668ced
 
 COCOAPODS: 1.11.2

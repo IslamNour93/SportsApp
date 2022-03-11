@@ -10,6 +10,7 @@ import UIKit
 class LeagueTableViewCell: UITableViewCell {
     
    
+    @IBOutlet weak var leagueView: UIView!
     @IBOutlet weak var youtubeButton: UIButton!
     @IBOutlet weak var leagueLabel: UILabel!
     
@@ -18,7 +19,7 @@ class LeagueTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        leagueView.frame = leagueView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         
     }
  

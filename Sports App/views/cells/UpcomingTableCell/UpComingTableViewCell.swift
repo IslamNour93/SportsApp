@@ -25,8 +25,7 @@ class UpComingTableViewCell: UITableViewCell{
         upComingCollectionView.delegate = self
         upComingCollectionView.register(UpcomingCollectionCell.nib(), forCellWithReuseIdentifier: UpcomingCollectionCell.identifier)
 
-        getEventsData(idLeague: leagueId as! String, completed: loadData)
-        
+        NetworkServices.getUpcomingData(idLeague: leagueId as! String, completed: loadData)
         loadData(arrOfEvents)
         
     }
@@ -34,30 +33,6 @@ class UpComingTableViewCell: UITableViewCell{
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-    }
-    
-    func getEventsData(idLeague:String,completed:@escaping([Event])->Void){
-        
-        let jsonUrlString = "https://www.thesportsdb.com/api/v1/json/2/eventsround.php?id=\(idLeague)&r=38&s=2021-2022#"
-        guard let url = URL(string: jsonUrlString) else {return}
-        
-        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).response{
-            response in switch response.result{
-            case.failure(_):
-                print("error")
-            case.success(_):
-                guard let data = response.data else{return}
-                do{
-                let json = try JSONDecoder().decode(UpCommingModel.self, from: data)
-                    guard let resultArr = json.events else{ return }
-                    completed(resultArr)
-                }
-                catch {
-                    print(error.localizedDescription)
-                }
-               
-            }
-        }
     }
     
     func loadData(_ data:[Event]) -> Void {

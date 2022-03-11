@@ -10,4 +10,5 @@ pod 'SDWebImage'
 pod 'lottie-ios'
 pod 'ReachabilitySwift'
 pod 'SkeletonView'
+pod 'ViewAnimator'
 end

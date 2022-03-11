@@ -27,7 +27,7 @@ class TeamsTableCell: UITableViewCell {
         TeamsCollectionView.delegate = self
         TeamsCollectionView.dataSource = self
         
-        getEventsData(completed: loadData)
+        NetworkServices.getTeamsData(completed: loadData)
         
         loadData(arrOfTeams)
     }
@@ -37,41 +37,13 @@ class TeamsTableCell: UITableViewCell {
 
     }
     
-    func getEventsData(completed:@escaping([Team])->Void){
-        
-        guard let leagueName = UserDefaults.standard.object(forKey: "leagueName") as? String else{return}
-        let replacingString = leagueName.replacingOccurrences(of: " ", with: "%20")
-        let jsonUrlString = "https://www.thesportsdb.com/api/v1/json/2/search_all_teams.php?l=\(replacingString)"
-        guard let url = URL(string: jsonUrlString) else {return}
-        
-        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).response{
-            response in switch response.result{
-            case.failure(_):
-                print("error")
-            case.success(_):
-                guard let data = response.data else{return}
-                do{
-                let json = try JSONDecoder().decode(TeamModel.self, from: data)
-                    guard let resultArr = json.teams else{ return }
-                    completed(resultArr)
-                }
-                catch {
-                    print(error.localizedDescription)
-                }
-               
-            }
-        }
-    }
-    
-    func loadData(_ data:[Team]) -> Void {
+   private func loadData(_ data:[Team]) -> Void {
         DispatchQueue.main.async {
             self.arrOfTeams = data
             print(self.arrOfTeams.count)
             self.TeamsCollectionView.reloadData()
-           
         }
     }
-    
 }
 
 extension TeamsTableCell: UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate{
@@ -85,9 +57,10 @@ extension TeamsTableCell: UICollectionViewDelegateFlowLayout,UICollectionViewDat
         
         let team = arrOfTeams[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamsCollectionCell.identifier, for: indexPath) as! TeamsCollectionCell
-        
+        guard team.strTeamBadge != nil else{return cell}
         cell.teamIcon.sd_setImage(with: URL(string: team.strTeamBadge!), completed: nil)
         cell.teamName.text = team.strTeam
+        
         return cell
     }
     

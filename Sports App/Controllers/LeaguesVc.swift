@@ -10,6 +10,7 @@ import Alamofire
 import Reachability
 import SDWebImage
 import SkeletonView
+
 class LeaguesVc: UIViewController {
     
     let sportsVc = SportsCollectionViewController()
@@ -20,7 +21,7 @@ class LeaguesVc: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateUi()
+        loadData(arrOfLeague)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -34,47 +35,24 @@ class LeaguesVc: UIViewController {
                }catch{
                  print("could not start reachability notifier")
                }
-        getLeagueData(strSport: sportName)
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 120
         tableView.estimatedRowHeight = 120
+        tableView.separatorStyle = .none
         
     }
     
     
-    func updateUi(){
+    func loadData(_ data:[Country]){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.getLeagueData(strSport: self.sportName)
+            self.arrOfLeague = data
             self.tableView.stopSkeletonAnimation()
             self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
             self.tableView.reloadData()
         })
     }
-    func getLeagueData(strSport:String){
-        
-        let jsonUrlString = "https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php?c=England&s=\(strSport)"
-        guard let url = URL(string: jsonUrlString) else {return}
-        
-        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).response{
-            response in switch response.result{
-            case.failure(_):
-                print("error")
-            case.success(_):
-                guard let data = response.data else{return}
-                do{
-                let json = try JSONDecoder().decode(LeagueModel.self, from: data)
-                    guard let resultArr = json.countrys else{return}
-                    self.arrOfLeague = resultArr
-                }
-                catch {
-                    print(error.localizedDescription)
-                }
-
-            }
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.isSkeletonable = true
@@ -89,17 +67,20 @@ class LeaguesVc: UIViewController {
               
           case .wifi:
               print("Reachable Via Wifi")
-              
+              NetworkServices.getLeagueData(strSport: sportName, completion: loadData)
+              loadData(arrOfLeague)
           case .cellular:
               print("Reachable via Cellular")
               
           case .unavailable:
               print("Network not reachable")
-            
+              let alert = UIAlertController(title: "Connection Failed", message: "You are not connected with Internet", preferredStyle: .alert)
+              let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+              alert.addAction(okAction)
+              present(alert, animated: true, completion: nil)
+              print("Network not reachable")
           case .none:
               print("None")
-              
-   
           }
         }
     
@@ -123,24 +104,30 @@ extension LeaguesVc :SkeletonTableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeagueTableViewCell
 
-        cell.leagueLabel.text = arrOfLeague[indexPath.row].strLeague
-        cell.leagueIcon.sd_setImage(with: URL(string: arrOfLeague[indexPath.row].strBadge!))
-        cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = 22
-        cell.layer.borderWidth = 0.3
-        cell.layer.shadowOpacity = 0.5
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.backgroundColor = .lightText
+        cell.leagueLabel.text = arrOfLeague[arrOfLeague.count-indexPath.row-1].strLeague
+        cell.leagueIcon.sd_setImage(with: URL(string: arrOfLeague[arrOfLeague.count-indexPath.row-1].strBadge!))
+        cell.youtubeButton.addAction(UIAction(handler: { _ in
+            if let youtubeStr = self.arrOfLeague[self.arrOfLeague.count-indexPath.row-1].strYoutube {
+                UIApplication.shared.open(URL(string: "https://\(youtubeStr)")!, options: [:], completionHandler: nil)}
+        }), for: .touchUpInside)
+        cell.leagueView.layer.cornerRadius = 15
+        cell.leagueView.layer.masksToBounds = true
+        cell.leagueView.layer.borderWidth = 0.3
+        cell.leagueView.layer.borderColor = UIColor.black.cgColor
+        cell.leagueView.layer.shadowColor = UIColor.black.cgColor
+        cell.leagueView.layer.shadowOpacity = 10
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        let eventsVC = self.storyboard?.instantiateViewController(withIdentifier: "eventsTable") as! EventsTableView
+        let league = arrOfLeague[arrOfLeague.count-indexPath.row-1]
+        let eventsVC = self.storyboard?.instantiateViewController(withIdentifier: "EventsViewController") as! EventsViewController
         eventsVC.title = "League Details"
-        UserDefaults.standard.set(arrOfLeague[indexPath.row].idLeague, forKey: "leagueID")
-        UserDefaults.standard.set(arrOfLeague[indexPath.row].strLeague, forKey: "leagueName")
+        eventsVC.league = league
+        UserDefaults.standard.set(arrOfLeague[arrOfLeague.count-indexPath.row-1].idLeague, forKey: "leagueID")
+        UserDefaults.standard.set(arrOfLeague[arrOfLeague.count-indexPath.row-1].strLeague, forKey: "leagueName")
         self.navigationController?.pushViewController(eventsVC, animated: true)
         
     }
