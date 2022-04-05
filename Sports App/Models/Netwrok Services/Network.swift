@@ -9,6 +9,8 @@ import Foundation
 import Alamofire
 class NetworkServices {
     
+    //MARK:- get Sports Data from Api
+    
     static func getSportsData(completion:@escaping([SportApi])->Void){
         
         let jsonUrlString = "https://www.thesportsdb.com/api/v1/json/2/all_sports.php#"
@@ -34,7 +36,7 @@ class NetworkServices {
        }
     }
     
-    
+    //MARK:- get Leagues Data from Api
     static  func getLeagueData(strSport:String,completion:@escaping([Country])->Void){
         
         let jsonUrlString = "https://www.thesportsdb.com/api/v1/json/2/search_all_leagues.php?c=England&s=\(strSport)"

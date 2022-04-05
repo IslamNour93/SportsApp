@@ -42,17 +42,15 @@ class EventsViewController: UIViewController {
         }
         else{
             favouriteBtnIsPressed = false
-//            removeFromFavoritesBybutton()
+            print("league has been removed")
+            removeFromFavoritesBybutton()
+            showToast(message: "League has been removed from Favourites", font: .boldSystemFont(ofSize: 15))
             userDefaults.set(favouriteBtnIsPressed, forKey: "\(league.idLeague!)")
             print(userDefaults.bool(forKey: "\(league.idLeague!)"))
             favouriteBtnOutlet.image = UIImage(systemName: "heart")
-            for i in 0..<arrOfFavoritesCoreData.count{
-                if arrOfFavoritesCoreData[i].leagueName == league.strLeague{
-                    deleteLeagueFromFavourite(league: arrOfFavoritesCoreData[i])
-                }
             }
-        }
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let league = league else {
@@ -81,6 +79,7 @@ class EventsViewController: UIViewController {
         eventsTableView.register(UpComingTableViewCell.nib(), forCellReuseIdentifier: UpComingTableViewCell.identifier)
         eventsTableView.register(LatestTableCell.nib(), forCellReuseIdentifier: LatestTableCell.identifier)
         eventsTableView.register(TeamsTableCell.nib(), forCellReuseIdentifier: TeamsTableCell.identifier)
+    getLeagues()
     }
     
     
@@ -116,27 +115,25 @@ class EventsViewController: UIViewController {
         }
     }
     
-  private func deleteLeagueFromFavourite(league:LeaguesCoreData){
-        context.delete(league)
-        do {
-            try context.save()
-            getLeagues()
-        }
-        catch{
-            print(error)
-        }
+    private func removeFromFavoritesBybutton(){
+        
+            do{
+                self.arrOfFavoritesCoreData = try context.fetch(LeaguesCoreData.fetchRequest())
+                for i in 0..<arrOfFavoritesCoreData.count{
+                    guard let league = league else {
+                        return
+                    }
+
+                    if  league.strLeague == arrOfFavoritesCoreData[i].leagueName{
+                        context.delete(arrOfFavoritesCoreData[i])
+                        try context.save()
+                    }
+                }
+            }catch{
+                print(error)
+            }
+            
     }
-//    private func removeFromFavoritesBybutton(){
-//        for i in 0..<arrOfFavoritesCoreData.count{
-//            guard let league = league else {
-//                return
-//            }
-//
-//            if arrOfFavoritesCoreData[i].leagueName == league.strLeague{
-//                deleteLeagueFromFavourite(league: arrOfFavoritesCoreData[i])
-//            }
-//        }
-//    }
   private  func showToast(message : String, font: UIFont) {
 
             let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2-200, y: self.view.frame.size.height-200, width: 400, height: 40))

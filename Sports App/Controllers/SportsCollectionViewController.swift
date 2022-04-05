@@ -45,8 +45,8 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
 
         DispatchQueue.main.async {
             self.arrOfSports = data
-            let animation = AnimationType.from(direction: .bottom, offset: 300)
-            UIView.animate(views: self.collectionView.visibleCells, animations: [animation] ,duration: 2)
+//            let animation = AnimationType.from(direction: .bottom, offset: 300)
+//            UIView.animate(views: self.collectionView.visibleCells, animations: [animation] ,duration: 2)
             self.collectionView.reloadData()
             self.animation.isHidden = true
             self.animation.removeFromSuperview()

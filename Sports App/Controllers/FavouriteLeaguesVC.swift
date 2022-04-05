@@ -27,6 +27,7 @@ class FavouriteLeaguesVC: UIViewController {
         favouriteLeagueTableView.dataSource = self
         favouriteLeagueTableView.delegate = self
         favouriteLeagueTableView.separatorStyle = .none
+        getLeagues()
 
     }
     

@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sports Collection View Controller-->
+        <!--Sports-->
         <scene sceneID="mud-Pe-GfL">
             <objects>
                 <collectionViewController id="pC6-CG-8Ja" customClass="SportsCollectionViewController" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,7 +30,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="178" height="182"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kun-E8-XUH">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kun-E8-XUH">
                                             <rect key="frame" x="0.0" y="0.0" width="178" height="182"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -71,7 +71,7 @@
                             <outlet property="delegate" destination="pC6-CG-8Ja" id="lTE-tO-t4k"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="2wd-aY-5jQ"/>
+                    <navigationItem key="navigationItem" title="Sports" id="2wd-aY-5jQ"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqm-yh-goe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -126,7 +126,7 @@
                                                             <buttonConfiguration key="configuration" style="plain" image="youtube"/>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemTealColor"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.67843137249999996" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="CLo-4H-iYC" secondAttribute="bottom" constant="21" id="5JT-NN-mFM"/>
                                                         <constraint firstItem="HqK-5c-6WQ" firstAttribute="leading" secondItem="CLo-4H-iYC" secondAttribute="trailing" constant="8" symbolic="YES" id="7I1-Gs-qDM"/>
@@ -180,34 +180,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khV-Sh-lHw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2437.68115942029" y="800.89285714285711"/>
-        </scene>
-        <!--Events Table View-->
-        <scene sceneID="9Fb-p1-xrR">
-            <objects>
-                <tableViewController storyboardIdentifier="eventsTable" id="NsT-sj-shZ" customClass="EventsTableView" customModule="Sports_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="i0R-m1-Xas">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="r1d-CK-FIF">
-                                <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r1d-CK-FIF" id="Ock-E9-ubK">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="NsT-sj-shZ" id="jPn-uj-0Go"/>
-                            <outlet property="delegate" destination="NsT-sj-shZ" id="RQg-NO-Znd"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5vf-yh-43G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7241" y="1084"/>
         </scene>
         <!--Team Details-->
         <scene sceneID="CuS-LP-zmY">
@@ -428,17 +400,19 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemTealColor"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.67843137249999996" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="PuB-fT-7bJ" firstAttribute="top" secondItem="1wx-QL-Izq" secondAttribute="top" constant="9" id="1Vf-WL-1X5"/>
                                                         <constraint firstItem="LWi-hn-fbm" firstAttribute="top" secondItem="1wx-QL-Izq" secondAttribute="top" constant="41" id="4Dj-g4-dcd"/>
-                                                        <constraint firstItem="LWi-hn-fbm" firstAttribute="leading" secondItem="PuB-fT-7bJ" secondAttribute="trailing" constant="8" symbolic="YES" id="FBM-Ea-ayL"/>
+                                                        <constraint firstItem="LWi-hn-fbm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PuB-fT-7bJ" secondAttribute="trailing" constant="8" symbolic="YES" id="FBM-Ea-ayL"/>
                                                         <constraint firstAttribute="bottom" secondItem="PuB-fT-7bJ" secondAttribute="bottom" constant="8" id="IDE-cH-4SU"/>
                                                         <constraint firstAttribute="bottom" secondItem="LWi-hn-fbm" secondAttribute="bottom" constant="39" id="InT-3N-ZfY"/>
                                                         <constraint firstItem="PuB-fT-7bJ" firstAttribute="leading" secondItem="1wx-QL-Izq" secondAttribute="leading" constant="8" id="KVN-ru-rdn"/>
+                                                        <constraint firstItem="xuE-yK-C63" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PuB-fT-7bJ" secondAttribute="trailing" constant="8" symbolic="YES" id="Yz9-Fy-GL4"/>
                                                         <constraint firstAttribute="trailing" secondItem="xuE-yK-C63" secondAttribute="trailing" constant="8" id="drn-y0-XJf"/>
                                                         <constraint firstAttribute="bottom" secondItem="xuE-yK-C63" secondAttribute="bottom" constant="43" id="m2H-Ez-SgQ"/>
                                                         <constraint firstItem="xuE-yK-C63" firstAttribute="top" secondItem="1wx-QL-Izq" secondAttribute="top" constant="43" id="qRT-FQ-VbW"/>
+                                                        <constraint firstAttribute="trailing" secondItem="LWi-hn-fbm" secondAttribute="trailing" constant="55" id="s2C-2w-pNW"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -603,9 +577,6 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -48,14 +48,14 @@ class LeaguesVc: UIViewController {
     func loadData(_ data:[Country]){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             self.arrOfLeague = data
-            self.tableView.stopSkeletonAnimation()
-            self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+//            self.tableView.stopSkeletonAnimation()
+//            self.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
             self.tableView.reloadData()
         })
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.isSkeletonable = true
+//        tableView.isSkeletonable = true
         tableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .gray, secondaryColor: .lightText), animation: nil, transition: .crossDissolve(0.25))
     }
     
@@ -114,8 +114,7 @@ extension LeaguesVc :SkeletonTableViewDataSource,UITableViewDelegate{
         cell.leagueView.layer.masksToBounds = true
         cell.leagueView.layer.borderWidth = 0.3
         cell.leagueView.layer.borderColor = UIColor.black.cgColor
-        cell.leagueView.layer.shadowColor = UIColor.black.cgColor
-        cell.leagueView.layer.shadowOpacity = 10
+        cell.leagueView.layer.shadowOpacity = 4
         return cell
     }
     
