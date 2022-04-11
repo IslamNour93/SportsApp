@@ -26,6 +26,7 @@ class FavouriteLeaguesVC: UIViewController {
         super.viewDidLoad()
         favouriteLeagueTableView.dataSource = self
         favouriteLeagueTableView.delegate = self
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         favouriteLeagueTableView.separatorStyle = .none
         getLeagues()
 

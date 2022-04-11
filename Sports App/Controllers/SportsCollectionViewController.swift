@@ -22,8 +22,7 @@ class SportsCollectionViewController: UICollectionViewController,UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
